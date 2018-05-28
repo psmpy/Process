@@ -1,0 +1,2 @@
+# myblog
+about simple blog 
