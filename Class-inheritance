@@ -1,0 +1,55 @@
+# -*- coding:utf-8 -*-
+
+import inspect
+
+
+class Base(object):
+    public=" class attr"
+    __private="class pri attr" #类的私有属性，内部可以直接引用，外部不能直接访问（可通过._Base__private访问，但是deprecation！），
+    def __init__(self):
+        print("parent")
+        self.attr="instance attr" #实例的属性
+    def f(self):
+        print(self.__private) #内部引用私有属性
+        
+        
+class A(Base):
+    def __init__(self):
+        print("i am A")
+        super().__init__()
+        print("leave A")
+        
+        
+class B(Base):
+    def __init__(self):
+        print("i am B")
+        super().__init__()
+        print("leave B")
+        
+        
+class C(B,A):
+    def __init__(self):
+        print("i am C")
+        super().__init__()
+        print("leave C")
+
+
+if __name__=="__main__":
+    #查看C的MRO表（C3算法，继承顺序）
+    print(inspect.getmro(C))
+    
+    #类的实例化，自动调用__init__()
+    c=C()
+    c.f()
+  
+ >>>
+ (<class '__main__.C'>, <class '__main__.B'>, <class '__main__.A'>, <class '__main__.Base'>, <class 'object'>)
+i am C
+i am B
+i am A
+parent
+leave A
+leave B
+leave C
+class pri attr
+    
