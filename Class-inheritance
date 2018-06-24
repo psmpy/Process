@@ -1,7 +1,10 @@
 # -*- coding:utf-8 -*-
 
 import inspect
-
+'''
+早期classic class 使用DFS算法，存在“无法重写问题”，2.2版本改进为new class 使用BFS算法，存在“单调性问题”；
+2.7版本开始使用C3算法，解决类多重继承问题中的以上两个问题。
+'''
 
 class Base(object):
     public=" class attr"
@@ -16,7 +19,7 @@ class Base(object):
 class A(Base):
     def __init__(self):
         print("i am A")
-        super().__init__()
+        super().__init__() #super不是函数，是个super类
         print("leave A")
         
         
